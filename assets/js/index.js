@@ -6,7 +6,51 @@ import Lobo from './lobo.js'
 import Oso from './oso.js'
 import Serpiente from './serpiente.js'
 
+//funcion asincrona
+
+async function animalAsincronoImagen (nombreAnimal){
+    try {
+        const solicitud = await fetch('../../animales.json');
+        const objAnimales = await solicitud.json();
+        let a = objAnimales.animales.filter((e)=> e.name==nombreAnimal )
+        let imagenFinal = a[0].imagen
+        return imagenFinal   
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+//funcion para limpiar formulario
+function limpiar(){
+    document.getElementById('animal').value="";
+    document.getElementById('edad').value="";
+    document.getElementById('comentarios').value="";
+    document.getElementById('preview').innerHTML="";
+}
+
+//validar si todos los campos estan completos (se da la respuesta por consola)
+function validar(animal, edad, comentarios){
+    let validacion=true;
+    
+    if (animal ==='Seleccione un animal'){
+        console.log('Por favor, seleccionar un animal del listado')
+        validacion = false
+    }else if(edad==='Seleccione un rango de años'){
+        console.log('Por favor, seleccionar el rango de edad del animal')
+        validacion = false
+    }else if(comentarios===""){
+        console.log('Por favor, escriba comentarios')
+        validacion = false
+    }
+    return validacion
+}
+
 //recoger el valor del animal seleccionado para asignar su imagen correspondiente (antes del evento click del boton)
+let aguilaImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Aguila')}' alt='Aguila' class='mx-auto d-block' height='200'>`
+let leonImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Leon')}' alt='Leon' class='mx-auto d-block' height='200'>`
+let loboImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Lobo')}' alt='Lobo' class='mx-auto d-block' height='200'>`
+let serpienteImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Serpiente')}' alt='Serpiente' class='mx-auto d-block' height='200' width='300'>`
+let osoImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Oso')}'alt='Oso' class='mx-auto d-block' height='200'>`
 
 const fotoAnimal=document.querySelector('#animal')
 function imagenAnimal(e) {
@@ -15,16 +59,15 @@ function imagenAnimal(e) {
     let img=document.getElementById('preview')
 
     if(value=='Aguila'){
-        img.innerHTML=`<img src='assets/imgs/Aguila.png' alt='Aguila' class='mx-auto d-block' height='200'>`
+        img.innerHTML=aguilaImagen
     }else if(value=='Leon'){
-        img.innerHTML=`<img src='assets/imgs/Leon.png' alt='Leon' class='mx-auto d-block' height='200'>`
+        img.innerHTML=leonImagen
     }else if(value=='Lobo'){
-        img.innerHTML=`<img src='assets/imgs/Lobo.png' alt='Lobo' class='mx-auto d-block' height='200'>`
+        img.innerHTML=loboImagen
     }else if(value=='Serpiente'){
-        img.innerHTML=`<img src='assets/imgs/Serpiente.png' alt='Serpiente' class='mx-auto d-block' height='200' width='300'>`
-    }
-    else if(value=='Oso'){
-        img.innerHTML=`<img src='assets/imgs/Oso.png' alt='Oso' class='mx-auto d-block' height='200'>`
+        img.innerHTML=serpienteImagen
+    }else if(value=='Oso'){
+        img.innerHTML=osoImagen
     }
 }
 fotoAnimal.addEventListener('change',imagenAnimal)
@@ -42,42 +85,51 @@ let img=document.getElementById('preview')
 let sonido=document.getElementById('player')
 let comentarios=document.getElementById('comentarios').value
 
-//Instanciar de acuerdo al animal escogido.
+//validar informacion
+validar(animal, edad, comentarios)
 
-if (animal=='Aguila'){
+//Instanciar de acuerdo al animal escogido.
+if (animal=='Aguila'&& validar(animal, edad, comentarios)){
     let aguila=new Aguila(animal,edad, img, comentarios, sonido)
-    tabla(`<img src='assets/imgs/Aguila.png' alt='Aguila' class='mx-auto d-block' height='200'></img>`)
-}else if(animal=='Leon'){
+    tabla(aguilaImagen, aguilaSonido,'audioAguila')
+}else if(animal=='Leon'&& validar(animal, edad, comentarios)){
     let leon= new Leon(animal, edad, img, comentarios, sonido)
-    tabla(`<img src='assets/imgs/Leon.png' alt='Leon' class='mx-auto d-block' height='200'>`)
-}else if(animal=='Lobo'){
+    tabla(leonImagen, leonSonido, 'audioLeon')
+}else if(animal=='Lobo' && validar(animal, edad, comentarios)){
     let lobo= new Lobo(animal, edad, img, comentarios, sonido)
-    tabla(`<img src='assets/imgs/Lobo.png' alt='Lobo' class='mx-auto d-block' height='200'>`)
-}else if(animal=='Oso'){
+    tabla(loboImagen, loboSonido, 'audioLobo')
+}else if(animal=='Oso'&& validar(animal, edad, comentarios)){
     let oso=new Oso(animal,edad, img, comentarios, sonido)
-    tabla(`<img src='assets/imgs/Oso.png' alt='Oso' class='mx-auto d-block' height='200'>`)
-}else if(animal=='Serpiente'){
+    tabla(osoImagen, osoSonido, 'audioOso')
+}else if(animal=='Serpiente'&& validar(animal, edad, comentarios)){
     let serpiente= new Serpiente(animal, edad, img, comentarios, sonido)
-    tabla(`<img src='assets/imgs/Serpiente.png' alt='Serpiente' class='mx-auto d-block' height='200' width='300'>`)
+    tabla(serpienteImagen, serpienteSonido, 'audioSerpiente')
 }
+//limpiar formulario
+limpiar()
 }
 registrar.addEventListener('click', informacion)
 
-//tarjetas que se agregan y sonido
-function tabla(imagenAnimalTabla){
-    
+//ruta del sonido
+let aguilaSonido=  `assets/sounds/Chillido.mp3`
+let leonSonido= `/assets/sounds/Rugido.mp3`
+let loboSonido= `/assets/sounds/Aullido.mp3`
+let osoSonido= `/assets/sounds/Gruñido.mp3`
+let serpienteSonido= `/assets/sounds/Siseo.mp3`
+
+//creacion de boton para que al hacer click sobre las tarjetas se reproduzca sonido
+function tabla(imagenAnimalTabla, nombreAudio, botonSonido){
     let btn=document.createElement('button')
-    let tabla=`<tr><td>${imagenAnimalTabla}<td></tr><tr> </tr>`
+    btn.setAttribute('id', botonSonido)
+    let tabla=`<tr><td>${imagenAnimalTabla}<td></tr><tr></tr><tr><img src='assets/imgs/audio.svg' height='30'></tr>`
     btn.innerHTML=tabla
     document.getElementById('Animales').appendChild(btn)   
+    const sound = new Audio() 
+    let button = document.getElementById(botonSonido) 
+    button.addEventListener('click', playSound) 
+    function playSound() { 
+    sound.src = nombreAudio
+    sound.play() 
 }
-
-function sonido(){
-    let boton1=`<img src='assets/imgs/audio.svg' height='30'<tr></tr>`
-    let btn1=document.createElement('button')
-    btn1.innerHTML=boton1
 }
-
-
-
 
