@@ -48,10 +48,10 @@ function validar(animal, edad, comentarios){
 }
 
 //recoger el valor del animal seleccionado para asignar su imagen correspondiente (antes del evento click del boton)
-let aguilaImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Aguila')}' alt='Aguila' class='mx-auto d-block' height='200'>`
-let leonImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Leon')}' alt='Leon' class='mx-auto d-block' height='200'>`
-let loboImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Lobo')}' alt='Lobo' class='mx-auto d-block' height='200'>`
-let serpienteImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Serpiente')}' alt='Serpiente' class='mx-auto d-block' height='200' width='300'>`
+let aguilaImagen=`<img src='./assets/imgs/${await animalAsincronoImagen('Aguila')}' alt='Aguila' class='mx-auto d-block' height='200'>`
+let leonImagen=`<img src='./assets/imgs/${await animalAsincronoImagen('Leon')}' alt='Leon' class='mx-auto d-block' height='200'>`
+let loboImagen=`<img src='./assets/imgs/${await animalAsincronoImagen('Lobo')}' alt='Lobo' class='mx-auto d-block' height='200'>`
+let serpienteImagen=`<img src='./assets/imgs/${await animalAsincronoImagen('Serpiente')}' alt='Serpiente' class='mx-auto d-block' height='200' width='300'>`
 let osoImagen=`<img src='assets/imgs/${await animalAsincronoImagen('Oso')}'alt='Oso' class='mx-auto d-block' height='200'>`
 
 const fotoAnimal=document.querySelector('#animal')
@@ -113,11 +113,11 @@ limpiar()
 registrar.addEventListener('click', informacion)
 
 //ruta del sonido
-let aguilaSonido=  `assets/sounds/Chillido.mp3`
-let leonSonido= `/assets/sounds/Rugido.mp3`
-let loboSonido= `/assets/sounds/Aullido.mp3`
-let osoSonido= `/assets/sounds/Gruñido.mp3`
-let serpienteSonido= `/assets/sounds/Siseo.mp3`
+let aguilaSonido=  `./assets/sounds/Chillido.mp3`
+let leonSonido= `./assets/sounds/Rugido.mp3`
+let loboSonido= `./assets/sounds/Aullido.mp3`
+let osoSonido= `./assets/sounds/Gruñido.mp3`
+let serpienteSonido= `./assets/sounds/Siseo.mp3`
 
 //creacion de boton para que al hacer click sobre las tarjetas se reproduzca sonido, y se ejecute un modal.
 function tabla(imagenAnimalTabla, nombreAudio, botonSonido, edad, comentarios){
