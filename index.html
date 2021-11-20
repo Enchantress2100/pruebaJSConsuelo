@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prueba Animales Salvajes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/estilos.css" />
+    <link rel="stylesheet" href="./assets/css/estilos.css" />
   </head>
   <body>
     <div class="row">
@@ -66,18 +66,24 @@
       </div>
     </div>
 
-    <audio controls id="player" class="d-none">
-    </audio>
-
-    <div class="modal fade" id="exampleModal">
-      <div class="modal-dialog modal-dialog-centered w-25" role="document">
-        <div class="modal-content bg-dark">
-          <div class="modal-body">
-            <button></button>
-          </div>
-        </div>
-      </div>
+    <div class="modal fade mt-2 mx-2  " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"> 
+      <div class="modal-dialog"> 
+        <div class="modal-content bg-secondary text-white"> 
+          <div class="modal-body">  
+            <img class="img-fluid my-3">  
+            <p class="text-center" id="animalModal"></p>  
+            <p class="text-center" id="edadModal"></p>  
+            <p class="text-center">Comentarios</p>  
+            <p class="text-center" id="comentariosModal"></p>  
+          </div>  
+          <div class="modal-footer"> 
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+          </div> 
+        </div> 
+      </div> 
     </div>
+
+    <audio controls id="player" class="d-none"></audio>
 
     <script type="module" src="./assets/js/index.js"></script>
     <script type="module" src="./assets/js/animal.js"></script>

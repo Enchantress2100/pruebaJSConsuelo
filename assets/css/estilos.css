@@ -27,7 +27,7 @@ body {
 
 #Animales {
   height: 100%;
-  background: #f0f0f0;
+  background:#f0f0f0;
 }
 
 #Animales div div {
@@ -43,7 +43,10 @@ body {
 }
 
 /* Modal */
-
 .modal-dialog{
     max-width: 85% !important;
+}
+#exampleModal{
+  position: relative;
+  bottom: 200px; left: 350px;
 }

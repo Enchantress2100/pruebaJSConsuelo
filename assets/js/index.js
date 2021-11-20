@@ -35,10 +35,12 @@ function validar(animal, edad, comentarios){
     if (animal ==='Seleccione un animal'){
         console.log('Por favor, seleccionar un animal del listado')
         validacion = false
-    }else if(edad==='Seleccione un rango de años'){
+    }
+    if(edad==='Seleccione un rango de años'){
         console.log('Por favor, seleccionar el rango de edad del animal')
         validacion = false
-    }else if(comentarios===""){
+    }
+    if(comentarios==""){
         console.log('Por favor, escriba comentarios')
         validacion = false
     }
@@ -91,19 +93,19 @@ validar(animal, edad, comentarios)
 //Instanciar de acuerdo al animal escogido.
 if (animal=='Aguila'&& validar(animal, edad, comentarios)){
     let aguila=new Aguila(animal,edad, img, comentarios, sonido)
-    tabla(aguilaImagen, aguilaSonido,'audioAguila')
+    tabla(aguilaImagen, aguilaSonido,'audioAguila', aguila.edad, aguila.comentarios)
 }else if(animal=='Leon'&& validar(animal, edad, comentarios)){
     let leon= new Leon(animal, edad, img, comentarios, sonido)
-    tabla(leonImagen, leonSonido, 'audioLeon')
+    tabla(leonImagen, leonSonido, 'audioLeon', leon.edad, leon.comentarios)
 }else if(animal=='Lobo' && validar(animal, edad, comentarios)){
     let lobo= new Lobo(animal, edad, img, comentarios, sonido)
-    tabla(loboImagen, loboSonido, 'audioLobo')
+    tabla(loboImagen, loboSonido, 'audioLobo', lobo.edad, lobo.comentarios)
 }else if(animal=='Oso'&& validar(animal, edad, comentarios)){
     let oso=new Oso(animal,edad, img, comentarios, sonido)
-    tabla(osoImagen, osoSonido, 'audioOso')
+    tabla(osoImagen, osoSonido, 'audioOso', oso.edad, oso.comentarios)
 }else if(animal=='Serpiente'&& validar(animal, edad, comentarios)){
     let serpiente= new Serpiente(animal, edad, img, comentarios, sonido)
-    tabla(serpienteImagen, serpienteSonido, 'audioSerpiente')
+    tabla(serpienteImagen, serpienteSonido, 'audioSerpiente', serpiente.edad, serpiente.comentarios)
 }
 //limpiar formulario
 limpiar()
@@ -117,10 +119,13 @@ let loboSonido= `/assets/sounds/Aullido.mp3`
 let osoSonido= `/assets/sounds/Gruñido.mp3`
 let serpienteSonido= `/assets/sounds/Siseo.mp3`
 
-//creacion de boton para que al hacer click sobre las tarjetas se reproduzca sonido
-function tabla(imagenAnimalTabla, nombreAudio, botonSonido){
+//creacion de boton para que al hacer click sobre las tarjetas se reproduzca sonido, y se ejecute un modal.
+function tabla(imagenAnimalTabla, nombreAudio, botonSonido, edad, comentarios){
     let btn=document.createElement('button')
     btn.setAttribute('id', botonSonido)
+    btn.setAttribute('class', 'btn btn-light')
+    btn.setAttribute('data-bs-toggle', "modal")
+    btn.setAttribute('data-bs-target', "#staticBackdrop")
     let tabla=`<tr><td>${imagenAnimalTabla}<td></tr><tr></tr><tr><img src='assets/imgs/audio.svg' height='30'></tr>`
     btn.innerHTML=tabla
     document.getElementById('Animales').appendChild(btn)   
@@ -130,6 +135,13 @@ function tabla(imagenAnimalTabla, nombreAudio, botonSonido){
     function playSound() { 
     sound.src = nombreAudio
     sound.play() 
+    document.getElementById('animalModal').innerHTML=`${imagenAnimalTabla}`
+    document.getElementById('edadModal').innerHTML=`${edad}`
+    document.getElementById('comentariosModal').innerHTML=`${comentarios}`
 }
 }
+
+
+
+
 
