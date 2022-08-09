@@ -140,8 +140,3 @@ function tabla(imagenAnimalTabla, nombreAudio, botonSonido, edad, comentarios){
     document.getElementById('comentariosModal').innerHTML=`${comentarios}`
 }
 }
-
-
-
-
-
